@@ -3,6 +3,10 @@
   "version": "0.0.2",
   "description": "Express Error Handler for Async Functions",
   "main": "index.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/Abazhenov/express-async-handler.git"
+  },
   "scripts": {
     "test": "mocha test.js"
   },
