@@ -5,7 +5,7 @@ Simple middleware for handling exceptions inside of async express routes and pas
 ```
 npm install --save express-async-handler
 ```
-
+or
 ```
 yarn add express-async-handler
 ```
