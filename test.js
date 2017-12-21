@@ -9,5 +9,4 @@ describe('asyncUtil', () => {
     })
     expect(foo).to.throw(error)
   })
-
 })
