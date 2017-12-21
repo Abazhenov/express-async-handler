@@ -1,10 +1,12 @@
 Simple middleware for handling exceptions inside of async express routes and passing them to your express error handlers.
 
-### Instalation:
+### Installation:
 
-
-```javascript
+```
 npm install --save express-async-handler
+```
+or
+```
 yarn add express-async-handler
 ```
 
@@ -14,7 +16,7 @@ yarn add express-async-handler
 const asyncHandler = require('express-async-handler')
 
 express.get('/', asyncHandler(async (req, res, next) => {
-	bar = await foo.findAll();
+	const bar = await foo.findAll();
 	res.send(bar)
 }))
 ```
