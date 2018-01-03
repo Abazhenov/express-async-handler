@@ -20,3 +20,9 @@ express.get('/', asyncHandler(async (req, res, next) => {
 	res.send(bar)
 }))
 ```
+
+#### Import in Typescript:
+
+```javascript
+import * as asyncHandler from 'express-async-handler'
+```
