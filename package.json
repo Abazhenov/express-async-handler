@@ -1,6 +1,6 @@
 {
   "name": "express-async-handler",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Express Error Handler for Async Functions",
   "main": "index.js",
   "repository": {
