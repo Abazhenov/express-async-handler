@@ -1,6 +1,6 @@
 const asyncUtil = fn =>
-(req, res, next) =>
-  fn(req, res, next)
+(req, res, next, ...args) =>
+  fn(req, res, next, ...args)
     .catch(next);
 
 module.exports = asyncUtil
