@@ -1,6 +1,7 @@
 const asyncUtil = fn =>
-(req, res, next, ...args) =>
-  fn(req, res, next, ...args)
+function asyncUtilWrap(req, res, next, ...args) {
+  return fn(req, res, next, ...args)
     .catch(next);
+}
 
 module.exports = asyncUtil
