@@ -20,6 +20,11 @@ describe('asyncUtil', () => {
     expect(foo).to.throw(error)
   })
 
+  it('should not throw an exception when a function passed into it does not throw one', async () => {
+    const foo = asyncUtil(() => {})
+    expect(foo).not.to.throw()
+  })
+
   it('should call next with the error when an async function passed into it throws', async () => {
     const error = new Error('catch me!')
     const next = sinon.spy();
