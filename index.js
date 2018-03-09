@@ -1,7 +1,11 @@
 const asyncUtil = fn =>
 function asyncUtilWrap(req, res, next, ...args) {
-  return fn(req, res, next, ...args)
-    .catch(next);
+  const fnReturn = fn(req, res, next, ...args)
+  if (fnReturn instanceof Promise) {
+    return fnReturn.catch(next)
+  } else {
+    return fnReturn
+  }
 }
 
 module.exports = asyncUtil

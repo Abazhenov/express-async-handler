@@ -11,7 +11,7 @@ chai.should()
 const asyncUtil = require('./index')
 
 describe('asyncUtil', () => {
-  
+
   it('should catch exceptions of a function passed into it', async () => {
     const error = new Error('catch me!')
     const foo = asyncUtil(() => {
@@ -52,4 +52,24 @@ describe('asyncUtil', () => {
     expect(result).to.equal(id);
   })
 
+  it('should accept a non-async function', async () => {
+    const next = sinon.spy()
+    const foo = asyncUtil((req, res, next) => {
+      next('test')
+    })
+
+    await foo(null, null, next)
+    expect(next).to.have.been.calledWith('test')
+  })
+
+  it('should accept a non-async function erroring', async () => {
+    const error = new Error('catch me!')
+    const next = sinon.spy();
+    const foo = asyncUtil((req, res, next) => {
+      next(error)
+    })
+
+    await foo(null, null, next)
+    expect(next).to.have.been.calledWith(error)
+  })
 })
