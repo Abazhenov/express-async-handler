@@ -1,10 +1,9 @@
 const asyncUtil = fn =>
 function asyncUtilWrap(req, res, next, ...args) {
-  const fnReturn = fn(req, res, next, ...args)
-  if (fnReturn instanceof Promise) {
-    return fnReturn.catch(next)
+  if (fn instanceof Promise) {
+    return fn(req, res, next, ...args).catch(next)
   } else {
-    return fnReturn
+    return fn(req, res, next, ...args)
   }
 }
 
