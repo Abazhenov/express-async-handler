@@ -72,4 +72,31 @@ describe('asyncUtil', () => {
     await foo(null, null, next)
     expect(next).to.have.been.calledWith(error)
   })
+
+  // NB, thenables are not guaranteed to have a `catch` method.
+  it('should handle thenables', async () => {
+    const error = Error('catch me!')
+    // allow us to find out when ES actually calls thenable's then method, which apparently happens asynchronously
+    let signalThenableRegistered
+    const registeringThenable = new Promise(res => {
+      signalThenableRegistered = res
+    })
+    // construct a minimalist thenable which we can manually fail at a time of our choosing
+    let triggerFailure
+    const thenable = {
+      then: sinon.spy((success, fail) => {
+        triggerFailure = fail
+        signalThenableRegistered()
+      })
+    }
+    // test the actual library feature
+    const next = sinon.spy()
+    const catchingThenable = asyncUtil(_ => thenable)(null, null, next)
+    await registeringThenable
+    expect(thenable.then).to.have.been.called
+    expect(next).not.to.have.been.called
+    triggerFailure(error)
+    await catchingThenable
+    expect(next).to.have.been.calledWith(error)
+  })
 })
