@@ -20,10 +20,8 @@
   ],
   "author": "Alex Bazhenov",
   "license": "MIT",
-  "dependencies": {
-    "@types/express": "*"
-  },
   "devDependencies": {
+    "@types/express": "*",
     "chai": "^4.1.2",
     "mocha": "^5.0.0",
     "sinon": "^4.2.1",
