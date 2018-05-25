@@ -12,12 +12,14 @@ const asyncUtil = require('./index')
 
 describe('asyncUtil', () => {
 
-  it('should catch exceptions of a function passed into it', async () => {
+  it('should call next with the error when a function passed into it throws', async () => {
     const error = new Error('catch me!')
+    const next = sinon.spy();
     const foo = asyncUtil(() => {
       throw error
     })
-    expect(foo).to.throw(error)
+    await foo(null, null, next)
+    expect(next).to.have.been.calledWith(error)
   })
 
   it('should call next with the error when an async function passed into it throws', async () => {
