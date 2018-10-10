@@ -1,7 +1,8 @@
 const asyncUtil = fn =>
-function asyncUtilWrap(req, res, next, ...args) {
+function asyncUtilWrap(...args) {
+  const next = args[args.length-1];
   return new Promise(function (resolve) {
-    resolve(fn(req, res, next, ...args));
+    resolve(fn(...args));
   }).catch(next);
 }
 
