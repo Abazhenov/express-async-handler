@@ -24,5 +24,5 @@ express.get('/', asyncHandler(async (req, res, next) => {
 #### Import in Typescript:
 
 ```javascript
-import * as asyncHandler from 'express-async-handler'
+import asyncHandler from "express-async-handler"
 ```
