@@ -21,6 +21,18 @@ express.get('/', asyncHandler(async (req, res, next) => {
 }))
 ```
 
+Without express-async-handler
+
+```javascript
+express.get('/',(req, res, next) => {
+    foo.findAll()
+    .then ( bar => {
+       res.send(bar)
+     } )
+    .catch(next); // error passed on to the error handling route
+})
+```
+
 #### Import in Typescript:
 
 ```javascript
