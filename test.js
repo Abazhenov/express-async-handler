@@ -41,15 +41,31 @@ describe('asyncUtil', () => {
     expect(next).to.have.been.calledWith('test')
   })
 
-  it('should provide additional arguments to the middleware', async () => {
-    const next = sinon.spy()
-    const id = '1';
-    const foo = asyncUtil(async (req, res, next, id) => {
-      return id;
+  describe('when provided additional arguments', () => {
+
+    it('should pass them to the middleware', async () => {
+      const next = sinon.spy()
+      const id = '1';
+      const foo = asyncUtil(async (req, res, next, id) => {
+        return id;
+      })
+  
+      const result = await foo(null, null, next, id);
+      expect(result).to.equal(id);
+    })
+  
+    it('should call next with the error when an async function passed into it throws', async () => {
+      const error = new Error('catch me!')
+      const next = sinon.spy();
+      const id = '1';
+      const foo = asyncUtil(async (req, res, next, id) => {
+        throw error
+      })
+  
+      await foo(null, null, next, id)
+      expect(next).to.have.been.calledWith(error)
     })
 
-    const result = await foo(null, null, next, id);
-    expect(result).to.equal(id);
   })
 
   it('should accept a non-async function', async () => {
