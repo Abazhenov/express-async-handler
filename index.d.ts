@@ -6,8 +6,9 @@ declare function expressAsyncHandler<
   ResBody = any,
   ReqBody = any,
   ReqQuery = core.Query,
->(handler: (...args: Parameters<express.RequestHandler<P, ResBody, ReqBody, ReqQuery>>) => void | Promise<void>):
-  express.RequestHandler<P, ResBody, ReqBody, ReqQuery>;
+  Locals extends Record<string, any> = Record<string, any>
+>(handler: (...args: Parameters<express.RequestHandler<P, ResBody, ReqBody, ReqQuery, Locals>>) => void | Promise<void>):
+  express.RequestHandler<P, ResBody, ReqBody, ReqQuery, Locals>;
 
 declare namespace expressAsyncHandler {
 
