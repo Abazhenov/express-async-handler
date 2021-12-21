@@ -2,7 +2,7 @@ import express = require('express');
 import core = require('express-serve-static-core');
 
 declare function expressAsyncHandler<
-  P = core.ParamsDictionary,
+  P extends core.Params = core.ParamsDictionary,
   ResBody = any,
   ReqBody = any,
   ReqQuery = core.Query,
